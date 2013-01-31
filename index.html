@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{Title}</title>
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {block:Description}
+            <meta name="description" content="{MetaDescription}" />
+        {/block:Description}
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
+
+
+
+    <style>
+        html {
+            height: 100%;
+
+        }
+    
+        p {
+            margin: 1em 0;
+        }
+                
+        a:visited {
+            text-decoration:none; 
+            color: #999;
+        }
+                
+        body {
+            text-align: left;
+            min-width: 320px;
+            font-family: Georgia, serif;
+            padding: 0 10px;
+        }
+        
+        header {
+            padding: 20px 0;
+            font-family: serif;
+            font-weight: bold;
+            color: black;
+
+        }
+        
+        header h1 {
+            font-weight: bold;
+            font-size: 60px;
+            text-transform: uppercase;
+            color: black;
+
+        }
+        
+        
+        header h1 a {
+            text-decoration: none;    
+
+        }
+        
+        header h1 a:visited {
+            text-decoration: none;    
+            color: black;
+
+
+        }
+        
+        header nav ul li {
+            display: inline;
+            margin: 0 10px 0 0;
+        }
+        
+        header nav ul li a, header nav ul li a:visited {
+            text-transform: lowercase;
+            color: black;
+            font-family: Georgia, serif;
+            text-decoration: none;
+
+
+        }
+        
+        
+        section#posts {
+            
+        }
+        
+        article.post {
+            margin-bottom: 50px;
+        }
+        
+        article.post h2 {
+            font-size: 26px;
+            margin-bottom: 0.2em;
+            text-transform: capitalize;
+            font-family: Verdana, sans-serif;
+            font-weight: bold; 
+            border-bottom: 1px black solid;
+            line-height: 1.4em;
+        
+        }
+        
+        article.post h2 a, article.post h2 a:visited {
+            text-decoration: none;    
+            color: #686E75;
+
+
+        }        
+        
+        article.post time {
+            margin-bottom: 2em;
+            display: block;
+        }
+        
+        article.post a {
+            color: #777;   
+            text-decoration:underline;            
+        }
+                
+        @media screen and (min-width: 600px){
+            #posts, header, footer{
+                width: 800px;
+                margin: 0 auto;
+            }
+            
+            
+        }
+        
+    </style>
+    </head>
+    <body>
+        
+        <header>
+            <h1><a href="/">*{Title}</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/quarterlynewsletter">Newsletter</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        {block:TagPage}
+            <h2>Posts tagged "{Tag}"</h2>
+        {/block:TagPage}
+
+        {block:Pages} 
+        <section class="">                
+            {Body}
+        </section>
+        
+        {/block:Pages}    
+
+        <section id="posts">
+            {block:Posts}
+                {block:Text}
+                    <article class="post text">
+                        {block:Title}
+                            <h2><a href="{Permalink}">{Title}</a></h2>
+                        {/block:Title}
+                        {block:Date} 
+                             <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonth}" pubdate>
+                                 {Month} {MonthNumber}, {Year}
+                             </time>
+                        {/block:Date}    
+                            
+                        {Body}
+                    </article>
+                {/block:Text}
+            {/block:Posts}
+        </section>
+            
+        <footer>
+            <nav>
+            {block:Pagination}
+                {block:PreviousPage}
+                    <a href="{PreviousPage}">Previous</a>
+                {/block:PreviousPage}
+
+                {block:JumpPagination length="5"}
+                    {block:CurrentPage}
+                        <span class="current_page">{PageNumber}</span>
+                    {/block:CurrentPage}
+
+                    {block:JumpPage}
+                        <a class="jump_page" href="{URL}">{PageNumber}</a>
+                    {/block:JumpPage}
+                {/block:JumpPagination}
+
+                {block:NextPage}
+                    <a href="{NextPage}">Next</a>
+                {/block:NextPage}
+            {/block:Pagination}
+            </nav>
+        </footer>
+        
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38010480-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        
+    </body>
+</html>
