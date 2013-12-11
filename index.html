@@ -3,19 +3,89 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>{Title}</title>
+        <meta property="og:site_name" content="{Title}"/>
+        {block:IndexPage}
+        <meta property="og:title" content="{Title}"/>
+        <meta property="og:type" content="blog"/>
+        <meta property="og:description" content="{MetaDescription}"/>
+        <meta property="og:image" content="{PortraitURL-128}"/>
+        {/block:IndexPage}
+        {block:PermalinkPage}
+
+        <meta property="og:url" content="{Permalink}"/>
+        <meta property="og:type" content="article"/>
+
+        {block:Posts}
+            {block:Text}
+                {block:Title}
+                <meta property="og:title" content="{PlaintextTitle}"/>
+                {/block:Title}
+                <meta property="og:description" content="{PlaintextBody}"/>
+            {/block:Text}
+
+            {block:Photo}
+                <meta property="og:image" content="{PhotoURL-500}"/>
+                {block:Caption}<meta property="og:description" content="{PlaintextCaption}"/>{/block:Caption}
+            {/block:Photo}
+
+            {block:Photoset}
+                {block:Photos}
+                <meta property="og:image" content="{PhotoURL-500}"/>
+                {/block:Photos}
+                {block:Caption}<meta property="og:description" content="{PlaintextCaption}"/>{/block:Caption}
+            {/block:Photoset}
+
+            {block:Quote}
+                <meta property="og:title" content="{PlaintextQuote}"/>
+                <meta property="og:description" content="{PlaintextSource}"/>
+                <meta property="og:image" content="{PortraitURL-128}"/>
+            {/block:Quote}
+
+            {block:Link}
+                <meta property="og:title" content="{PlaintextName}"/>
+                <meta property="og:description" content="{PlaintextDescription}"/>
+                <meta property="og:image" content="{PortraitURL-128}"/>
+            {/block:Link}
+
+            {block:Chat}
+                <meta property="og:title" content="{PlaintextTitle}"/>
+                <meta property="og:description" content="{block:Lines}{block:Label}{Label}: {/block:Label}{Line} &bull; {/block:Lines}"/>
+                <meta property="og:image" content="{PortraitURL-128}"/>
+            {/block:Chat}
+
+            {block:Audio}
+                <meta property="og:title" content="{block:Artist}{Artist} - {/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}"/>
+                <meta property="og:description" content="{PlaintextCaption}"/>
+                {block:AlbumArt}<meta property="og:image" content="{AlbumArtURL}"/>{/block:AlbumArt}
+            {/block:Audio}
+
+            {block:Video}
+                {block:Caption}<meta property="og:description" content="{PlaintextCaption}"/>{/block:Caption}
+            {/block:Video}
+
+            {block:Answer}
+                <meta property="og:title" content="{PlaintextQuestion}"/>
+                <meta property="og:description" content="{PlaintextAnswer}"/>
+                <meta property="og:image" content="{PortraitURL-128}"/>
+            {/block:Answer}
+            
+            {/block:Posts}
+
+        {/block:PermalinkPage}
+        
         <link rel="shortcut icon" href="{Favicon}">
         <link rel="alternate" type="application/rss+xml" href="{RSS}">
         {block:Description}
             <meta name="description" content="{MetaDescription}" />
         {/block:Description}
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
+        <title>{Title}</title>
+
 
 
     <style>
         html {
             height: 100%;
-
         }
     
         p {
@@ -33,14 +103,14 @@
             font-family: Georgia, serif;
         }
         
-        div#header_background {
+        div.header_background {
             height: 210px;
             margin-bottom: -210px;
             background-color: #20421B;
             }
         
         header {
-            margin: 0px auto 40px auto;
+            margin: 0px auto 20px auto;
             padding: 10px;
             font-family: serif;
             font-weight: bold;
@@ -60,7 +130,7 @@
 
         }
         
-        header a, header a:visited {
+        header a:visited {
             text-decoration: none;   
             color: #FFEBB8;
 
@@ -81,23 +151,21 @@
         }
         
         
-        section#posts {
+        section.posts {
             padding: 0 10px;
             
         }
         
-        
         article.post {
             margin-bottom: 50px;
-            line-height: 1.5;
         }
         
         article.post h2 {
-            font-size: 26px;
+            font-size: 30px;
             text-transform: capitalize;
             font-family: Verdana, sans-serif;
-            font-weight: bold; 
-        
+            font-weight: bold;
+
         }
         
         article.post h2 a, article.post h2 a:visited {
@@ -122,28 +190,21 @@
             padding: 10px;    
         }
             
-        iframe#tumblr_controls {
-            display: none;
-        }    
-            
         @media screen and (min-width: 460px){
-            section#posts, header, footer{
+            section.posts, header, footer{
                 margin: 0 auto;
-                width: 600px;
+                width: 800px;
             }
             
             header {
-                margin-bottom: 40px;
+                margin-bottom: 20px;
             }
             
-            div#header_background {
+            div.header_background {
                 height: 140px;
                 margin-bottom: -140px;
             }
             
-            iframe#tumblr_controls {
-                display: inline;
-            }
             
         }
         
@@ -151,32 +212,26 @@
     </head>
     <body>
         
-        <div id="header_background">
+        <div class="header_background">
         
         </div>
         <header>
-            <h1><a href="/">*{Title}</a></h1>
+            <h1><a href="{BlogURL}">*{Title}</a></h1>
             <nav>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/quarterlynewsletter">Newsletter</a></li>
+                    <li><a href="{BlogURL}">Home</a></li>
+                    {block:HasPages}
+                        {block:Pages}
+                        <li><a href="{URL}">{Label}</a></li>
+                        {/block:Pages}
+                    {/block:HasPages}
                 </ul>
             </nav>
         </header>
 
-        {block:TagPage}
-            <h2>Posts tagged "{Tag}"</h2>
-        {/block:TagPage}
-
-        {block:Pages} 
-        <section class="">                
-            {Body}
-        </section>
-        
         {/block:Pages}    
 
-        <section id="posts">
+        <section class="posts">
             {block:Posts}
                 {block:Text}
                     <article class="post text">
@@ -184,14 +239,45 @@
                             <h2><a href="{Permalink}">{Title}</a></h2>
                         {/block:Title}
                         {block:Date} 
-                             <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonth}" pubdate>
-                                 {Month} {MonthNumber}, {Year}
-                             </time>
+                            <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonth}" pubdate>
+                                {Month} {MonthNumber}, {Year}
+                            </time>
                         {/block:Date}    
-                            
                         {Body}
+                        {block:More}
+                        <a href="{Permalink}" class="more">Continue reading</a>
+                        {/block:More}	
                     </article>
                 {/block:Text}
+                {block:Photo}
+                    <article class="post photo">
+                    {LinkOpenTag}
+                        <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
+                    {LinkCloseTag}
+                    {block:HighRes}
+                        <a href="{PhotoURL-HighRes}">View in High-Res</a>
+                    {/block:HighRes}
+                    {block:Exif}
+                        <ul class="exif">
+                            {block:Camera}
+                            <li>Camera: {Camera}</li>
+                            {/block:Camera}
+                            {block:Aperture}
+                            <li>Aperture: {Aperture}</li>
+                            {/block:Aperture}
+                            {block:Exposure}
+                            <li>Exposure: {Exposure}</li>
+                            {/block:Exposure}
+                            {block:FocalLength}
+                            <li>Focal Length: {FocalLength}</li>
+                            {/block:FocalLength}
+                        </ul>
+                    {/block:Exif}
+                    {block:Caption}
+                        <div class="caption">{Caption}</div>
+                    {/block:Caption}
+                    </article>
+                {/block:Photo}	
             {/block:Posts}
         </section>
             
