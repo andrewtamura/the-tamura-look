@@ -72,76 +72,100 @@
             {/block:Posts}
 
         {/block:PermalinkPage}
-        
+        <title>{block:PostTitle}{PostTitle} - {/block:PostTitle}{Title}</title>
+
         <link rel="shortcut icon" href="{Favicon}">
         <link rel="alternate" type="application/rss+xml" href="{RSS}">
         {block:Description}
             <meta name="description" content="{MetaDescription}" />
         {/block:Description}
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
-        <title>{Title}</title>
+<link href='http://fonts.googleapis.com/css?family=PT+Mono|Merriweather' rel='stylesheet' type='text/css'>
 
 
 
     <style>
         html {
             height: 100%;
+            text-align: center;
         }
     
         p {
             margin: 1em 0;
         }
                 
+        a {
+            color: #333332;
+            text-transform: underline;
+        }
+                
         a:visited {
-            text-decoration:none; 
-            color: #999;
+            text-decoration: none; 
+            color: #333332;
+        }
+                
+        body {
+            text-align: left;
+            min-width: 320px;
+            max-width: 600px;
+            margin: auto;
+            font-family: 'Merriweather', serif;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            font-style: normal;
+            color: #333332;
+            font-size: 18px;
+            line-height: 1.4;
+            -webkit-font-smoothing: antialiased;
         }
         
         img {
             width: 100%;
         }
-
-        body {
-            text-align: left;
-            min-width: 320px;
-            font-family: Georgia, serif;
-        }
         
         div.header_background {
-            height: 210px;
-            margin-bottom: -210px;
-            background-color: #20421B;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background-image: url('http://static.tumblr.com/jqlkvom/RRCmycw4d/header.jpg');
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            z-index: -1;
             }
         
         header {
-            margin: 0px auto 20px auto;
-            padding: 10px;
-            font-family: serif;
+            margin: auto auto;
+            height: 300px;
+            font-family: 'PT Mono', sans-serif;
             font-weight: bold;
-            color: #FFEBB8;
+            text-align: center;
+            color: white;
 
         }
         
         header h1 {
-            margin: 0 0 20px 0;
+            padding-top: 90px;
             font-weight: bold;
             font-size: 60px;
             text-transform: uppercase;
+            line-height: 1em;
         }
         
         header h1 a {
-            text-decoration: none;    
-
+            text-decoration: none;
+            color: white;
         }
         
         header a:visited {
-            text-decoration: none;   
-            color: #FFEBB8;
-
+            text-decoration: none;
+            color: white;
         }
         
         header nav {
-            font-family: Georgia, serif;
         }
         
         header nav ul li {
@@ -152,10 +176,12 @@
         header nav ul li a {
             text-transform: lowercase;
             text-decoration: none;
+            color: white;
         }
         
         
         section.posts {
+            margin-top: 20px;
             padding: 0 10px;
             
         }
@@ -165,10 +191,12 @@
         }
         
         article.post h2 {
-            font-size: 30px;
+            font-size: 28px;
             text-transform: capitalize;
-            font-family: Verdana, sans-serif;
+            font-family: 'PT Mono', sans-serif;
             font-weight: bold;
+            display: inline;
+            margin-right: 5px;
 
         }
         
@@ -180,9 +208,11 @@
         }        
         
         article.post time {
-            font-family: Verdana, sans-serif;
+            font-family: 'PT Mono', sans-serif;
+            color: gray;
             margin-bottom: 2em;
-            display: block;
+            font-size: 16px;
+            display: inline;
         }
         
         article.post a {
@@ -196,21 +226,23 @@
             
         @media screen and (min-width: 460px){
             section.posts, header, footer{
-                margin: 0 auto;
-                width: 800px;
+
+            }
+            
+            img {
+                width: 600px;
             }
             
             header {
-                margin-bottom: 20px;
+                height:300px;
             }
-
-            img {
-                width: 600px;    
+            
+            header nav {
+                margin-top: 80px;
             }
             
             div.header_background {
-                height: 140px;
-                margin-bottom: -140px;
+                height: 300px;
             }
             
             
@@ -219,12 +251,10 @@
     </style>
     </head>
     <body>
-        
-        <div class="header_background">
-        
-        </div>
         <header>
-            <h1><a href="{BlogURL}">*{Title}</a></h1>
+            <div class="header_background"></div>
+            <h1><a href="{BlogURL}">{Title}</a></h1>
+            <h2>San Francisco, CA USA</h2>
             <nav>
                 <ul>
                     <li><a href="{BlogURL}">Home</a></li>
@@ -248,13 +278,10 @@
                         {/block:Title}
                         {block:Date} 
                             <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonth}" pubdate>
-                                {Month} {MonthNumber}, {Year}
+                                {ShortMonth} {MonthNumber}, {Year}
                             </time>
                         {/block:Date}    
                         {Body}
-                        {block:More}
-                        <a href="{Permalink}" class="more">Continue reading</a>
-                        {/block:More}	
                     </article>
                 {/block:Text}
                 {block:Photo}
