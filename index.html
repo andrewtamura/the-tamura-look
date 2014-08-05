@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <meta property="og:site_name" content="{Title}"/>
+        <meta name="p:domain_verify" content="3b40b47cc2c70b14a62b425f1d98034a"/>
+
         {block:IndexPage}
         <meta property="og:title" content="{Title}"/>
         <meta property="og:type" content="blog"/>
@@ -14,7 +16,6 @@
 
         <meta property="og:url" content="{Permalink}"/>
         <meta property="og:type" content="article"/>
-
         {block:Posts}
             {block:Text}
                 {block:Title}
@@ -80,9 +81,8 @@
             <meta name="description" content="{MetaDescription}" />
         {/block:Description}
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
-<link href='http://fonts.googleapis.com/css?family=PT+Mono|Merriweather' rel='stylesheet' type='text/css'>
-
-
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Mono|Merriweather">
+        <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <style>
         html {
@@ -117,6 +117,7 @@
             font-size: 18px;
             line-height: 1.5em;
             -webkit-font-smoothing: antialiased;
+            background-color: transparent;
         }
         
         img {
@@ -144,11 +145,13 @@
             font-weight: bold;
             text-align: center;
             color: white;
+            opacity: 1;
+            filter: alpha(opacity=1); /* For IE8 and earlier */
 
         }
         
         header h1 {
-            padding-top: 90px;
+            padding-top: 50px;
             font-weight: bold;
             font-size: 60px;
             text-transform: uppercase;
@@ -171,6 +174,7 @@
         header nav ul li {
             display: inline;
             margin: 0 10px 0 0;
+            list-style-type: None;
         }
         
         header nav ul li a {
@@ -178,7 +182,6 @@
             text-decoration: none;
             color: white;
         }
-        
         
         section.posts {
             margin-top: 20px;
@@ -190,6 +193,14 @@
             margin-bottom: 50px;
         }
         
+        article.post ul {
+            margin-left: 40px;
+        }
+        
+        article.post li {
+            list-style-type: square;
+        }
+        
         article.post h2 {
             font-size: 28px;
             text-transform: capitalize;
@@ -197,7 +208,7 @@
             font-weight: bold;
             display: inline;
             margin-right: 5px;
-            line-height: 1em
+            line-height: 1em;
 
         }
         
@@ -239,7 +250,7 @@
             }
             
             header nav {
-                margin-top: 80px;
+                margin-top: 50px;
             }
             
             div.header_background {
@@ -279,7 +290,7 @@
                         {/block:Title}
                         {block:Date} 
                             <time datetime="{Year}-{MonthNumberWithZero}-{DayOfMonth}" pubdate>
-                                {ShortMonth} {MonthNumber}, {Year}
+                                {ShortMonth} {DayOfMonth}, {Year}
                             </time>
                         {/block:Date}    
                         {Body}
