@@ -89,7 +89,7 @@
             height: 100%;
             text-align: center;
         }
-    
+        
         p {
             margin: 1em 0;
         }
@@ -98,12 +98,12 @@
             color: #333332;
             text-transform: underline;
         }
-                
+         
         a:visited {
             text-decoration: none; 
             color: #333332;
         }
-                
+        
         body {
             text-align: left;
             min-width: 320px;
@@ -147,7 +147,6 @@
             color: white;
             opacity: 1;
             filter: alpha(opacity=1); /* For IE8 and earlier */
-
         }
         
         header h1 {
@@ -183,6 +182,11 @@
             color: white;
         }
         
+        body nav {
+            text-align: center;
+            font-size: 16px;
+        }
+        
         section.posts {
             margin-top: 20px;
             padding: 0 10px;
@@ -209,14 +213,11 @@
             display: inline;
             margin-right: 5px;
             line-height: 1em;
-
         }
         
         article.post h2 a, article.post h2 a:visited {
-            text-decoration: none;    
+            text-decoration: none;
             color: #2F3838;
-
-
         }        
         
         article.post time {
@@ -227,17 +228,39 @@
         }
         
         article.post a {
-            color: #777;   
-            text-decoration:underline;            
+            color: #777;
+            text-decoration:underline;
         }
-            
+        
         footer {
-            padding: 10px;    
+            padding: 10px;
+            margin: 10px; 
+            border-top: 1px solid black;
+            margin-top: 20px; 
+            text-align: center;
+            font-size: 14px;
         }
-            
+         
+        footer ul li {
+            display: inline;
+            list-style-type: none;
+            margin-right: 20px;
+        }
+         
+        .current_page {
+            font-size: 18px;
+            border-bottom: 1px solid black;
+        }
+        .jump_page {
+            font-size: 14px;
+        }
+        
+        .cursor {
+            cursor: pointer;
+        }
+        
         @media screen and (min-width: 460px){
             section.posts, header, footer{
-
             }
             
             img {
@@ -255,10 +278,7 @@
             div.header_background {
                 height: 300px;
             }
-            
-            
         }
-        
     </style>
     </head>
     <body>
@@ -324,12 +344,10 @@
                 {/block:Photo}	
             {/block:Posts}
         </section>
-            
-        <footer>
-            <nav>
+        <nav>
             {block:Pagination}
                 {block:PreviousPage}
-                    <a href="{PreviousPage}">Newer</a>
+                    <a href="{PreviousPage}">&#171; Newer</a>
                 {/block:PreviousPage}
 
                 {block:JumpPagination length="5"}
@@ -343,10 +361,15 @@
                 {/block:JumpPagination}
 
                 {block:NextPage}
-                    <a href="{NextPage}">Older</a>
+                    <a href="{NextPage}">Older &#187</a>
                 {/block:NextPage}
             {/block:Pagination}
-            </nav>
+        </nav>
+        <footer>
+            <ul>
+                <li>Copyright &#169; {CopyrightYears}</li>
+                <li class="cursor" onClick="window.scroll(0,0);">Top &uarr;</li>
+          </ul>
         </footer>
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
